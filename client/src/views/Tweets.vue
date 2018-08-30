@@ -70,8 +70,8 @@ export default {
         .then(({ data }) => {
           this.tweets = data
         })
-        .catch((e) => {
-          console.log(e)
+        .catch(() => {
+          // console.log(e)
         })
     }
   },
