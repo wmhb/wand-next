@@ -1,0 +1,93 @@
+// --------
+//  _typography.scss
+// --------
+
+/*
+ * @font-face Rules
+ */
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  normal;
+  font-weight: 400;
+  src: url("/assets/fonts/Inter-UI-Regular.woff2") format("woff2"),
+       url("/assets/fonts/Inter-UI-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter UI';
+  font-style:  normal;
+  font-weight: 700;
+  src: url("/assets/fonts/Inter-UI-Bold.woff2") format("woff2"),
+       url("/assets/fonts/Inter-UI-Bold.woff") format("woff");
+}
+
+/*
+ * Base Typography Settings
+ */
+ h1, h2, h3 {
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+.x-large {
+  color: #222;
+  font-size: 55px;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  text-indent: -2px;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  font-weight: 700;
+}
+
+h2,
+.large {
+  font-size: 24px;
+  letter-spacing: -0.4px;
+  line-height: 30px;
+  margin-bottom: 25px;
+  margin-top: 10px;
+}
+
+h3,
+.medium {
+  font-size: inherit;
+}
+
+h1 > a,
+.x-large > a,
+h2 > a,
+.large > a,
+h3 > a,
+.medium > a {
+  color: inherit;
+  text-decoration: none !important;
+  text-shadow: none;
+  background: none;
+}
+
+@mixin highlight ($color){
+  display: inline-block;
+  background: $color;
+  padding: 5px 0;
+  transform: translateX(10px);
+  box-shadow: 10px 0 0 $color, -10px 0 0 $color;
+  -webkit-box-shadow: 10px 0 0 $color, -10px 0 0 $color;
+  -moz-box-shadow: 10px 0 0 $color, -10px 0 0 $color;
+}
+
+.highlight-black {
+  @include highlight($black);
+  color: #fff;
+}
+
+.highlight-fatyellow {
+  @include highlight($fatyellow);
+}
+
+.highlight-flashygreen {
+  @include highlight($flashygreen);
+}
+

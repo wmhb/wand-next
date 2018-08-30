@@ -1,0 +1,64 @@
+// --------
+//  _layout.scss
+// --------
+
+.view-wrapper {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.page-wrapper {
+  background: $white-solid;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-white,
+.bg-white .reveal {
+  background-color: $white-solid;
+}
+
+.bg-lightgrey,
+.bg-lightgrey .reveal {
+  background-color: $lightergrey;
+}
+
+.bg-fatyellow,
+.bg-fatyellow .reveal {
+  background-color: $fatyellow;
+}
+
+.bg-flashygreen,
+.bg-flashygreen .reveal {
+  background-color: $flashygreen;
+}
+
+.bg-smoothviolet,
+.bg-smoothviolet .reveal {
+  background-color: $smoothviolet;
+}
+
+.bg-hotpink,
+.bg-hotpink .reveal {
+  background-color: $hotpink;
+}
+
+.bg-heavenblue,
+.bg-heavenblue .reveal {
+  background-color: $heavenblue;
+}
+
+.bg-sunsetorange,
+.bg-sunsetorange .reveal {
+  background-color: $sunsetorange;
+}
+
+.diag {
+  position: absolute;
+
+  &--pink {
+    fill: $hotpink
+  }
+}
