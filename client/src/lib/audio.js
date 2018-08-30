@@ -14,8 +14,8 @@ const audio = {
         if (gongPlayPromise !== undefined) {
           gongPlayPromise
             .then(() => {})
-            .catch((error) => {
-              console.log('[audio][gong]', 'Gong responded with ', error)
+            .catch(() => {
+              // console.log('[audio][gong]', 'Gong responded with ', error)
             })
         }
       } else {
@@ -57,8 +57,8 @@ const audio = {
       if (audioPlayPromise !== undefined) {
         audioPlayPromise
           .then(() => {})
-          .catch((error) => {
-            console.log('[audio][soundcloud]', 'Soundcloudplayer responded with ', error)
+          .catch(() => {
+            // console.log('[audio][soundcloud]', 'Soundcloudplayer responded with ', error)
           })
       }
     },

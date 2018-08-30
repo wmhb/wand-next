@@ -34,8 +34,8 @@ const bootstrap = () => {
         Store.dispatch('setConfig', data)
         initApp()
       })
-      .catch((err) => {
-        console.error('[system]', 'Could not fetch config. Response: ', err)
+      .catch(() => {
+        // console.error('[system]', 'Could not fetch config. Response: ', err)
       })
   }
 }
