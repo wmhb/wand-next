@@ -1,0 +1,42 @@
+// --------
+//  _transitions.scss
+// --------
+
+.slide-h-enter {
+  transform: translate3d(100%, 0, 0);
+}
+
+.slide-h-leave-to {
+  transform: translate3d(-100%, 0, 0);
+}
+
+.slide-h-enter-to,
+.slide-h-leave {
+  transform: translate3d(0, 0, 0);
+}
+.slide-h-enter-active,
+.slide-h-leave-active {
+  position: absolute;
+  overflow: hidden;
+  backface-visibility: hidden;
+  transition: transform $transition-duration $ease-cb;
+}
+
+.slide-v-enter {
+  transform: translate3d(0, 100%, 0);
+}
+
+.slide-v-leave-to {
+  transform: translate3d(0, -100%, 0);
+}
+
+.slide-v-enter-to,
+.slide-v-leave {
+  transform: translate3d(0, 0, 0);
+}
+.slide-v-enter-active,
+.slide-v-leave-active {
+  position: absolute;
+  backface-visibility: hidden;
+  transition: transform $transition-duration $ease-cb;
+}

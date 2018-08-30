@@ -1,0 +1,40 @@
+// --------
+//  _base.scss
+// --------
+
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #f4f4f4;
+  color: $black;
+  font: 15px/22px 'Inter UI', system-ui, sans-serif;
+
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: -0.002em;
+
+  font-weight: 400;
+
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+
+  font-kerning: normal;
+  -moz-font-feature-settings:"kern" 1, "liga" 1;
+  -ms-font-feature-settings:"kern" 1, "liga" 1;
+  -o-font-feature-settings:"kern" 1, "liga" 1;
+  -webkit-font-feature-settings:"kern" 1, "liga" 1;
+  font-feature-settings:"kern" 1, "liga" 1;
+}
+
+@import './mixins';
+@import './typography';
+@import './layout';
+@import './transitions';
