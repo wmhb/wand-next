@@ -1,0 +1,56 @@
+matrix:
+  include:
+  - name: Frontend
+    language: node_js
+    node_js:
+    - '10'
+    env:
+      global:
+      - JOBS=1
+      - secure: cJXTInMsuzWjxHhi1nLYqF1Q+QTe6+6nxF2s7SArhnBBdmMyeLCU0bJb6Lma603InimF6Qtvxj3F6XFZyp7SYW0M9VNcopraDiGdwFOfmKuQsIBwiGbuljKndAoB8tZKt3QIPhtrML5wCNZsnRZpC9Hxz9bdcEZEAA7zooDQxm/A+OpSWABmdnAg2O9QM+bcYz/zJA+Y5nvdOaapKc1NVi2icJ7a7WuXfgpsTMDMo7XqKt++i6czaZMfTKOowsevsd32yAHPXhHfwPaleNU0Bc8MlG0GTmm3Dej2NNo+hqyF4mkICgbQHIc1LQNHnR3XQGvuxabM4MEuwb8rExQWRREPFPLHvLlxyB1WgiRbFipmbE3Nr7opMk/arBg5LtMg75WUcGFhPoYIBesAALEY3R/CzwFZYX0GMyR6/dsgJRgHKmDFOJfDIF/3WCjo0W4llyS29pyjpirf9u1vNmK/Fkq1yvKU7n9lbk89TfRAbGrUXwXf7tH7bfshbMvK5BW3pFxpNDO6dIzosRNCMhAsMvA5hN0aW2OikSABMEKa0gR4Z6lIAVHVgg0H59Xp+Wv2gjnpHwRLzjOUMNBMRgAbPewEq5uZaW06s4zW1dYHUDfByB/gYzDh9ZwVQI0TNu2rsfaHVUrayZx3Z4CCnVjiwUvu4VXuam1yr7i6NJ8dyoI=
+      - secure: AsyyvLc2BvG4rvoifNJnMX1QI5JQp6pv122IJ+hrIedwnOkYleiM5ytkFLDaosQ3IkQK5NFwxcDiaE/M7LgfgUvPOY1d51Z9QBX6J7TXFz5XdQ4ap8pmr68MCtO3n/5ISE/EsGS/fwmwG/4/JMQPpdpxu7kGlMkUuKETrwVWsQG/c/VWonf0bsqNy4zEaxLK11HJmwChSI3GSRIuGFGBEPE91sxivTqMrCfbJPVLvLyDseukOWbv4s8RMp5DM5tGp0n4MJevcZf0DAeenyZbjOSTzPll6lZbtYXk9+Z7JXHP2bQi6M7GG+VnBiVPdX5gYhbPFrpubU3YxUV0LQlQ+BA1Kq7uwdvX4w8m418QCnm2Pctc231FXq7+BTuO8/R6dm7jITRkMc+GffVsBXoQrHKhJdo2VaWiJ1HrklJqnBx6NkuNav9MFZ5fxqTGFTKCUxkXenyDrnn00s8zSFuAACw9SWRgqZWQm1cREMWhWYOtPUU5C826Sxi0sj/ik2SPSFvo7ia8lKAg1gji8Y88sdSxtJcX0pdol/vY6bae5oPCNZgmfEItlUb6EL/moY6zJrZB5yUhYFFb2yD02nNfEKmMtWc++ovVUfeVakVkqjCF6E9qhVRixnG8hD66w8Y9gO6zqx2bSldHMx7nMh03lIBlGP9KzOKDMnirVVyzSSk=
+      - secure: QnaU6mhkp6Kmkx4DnkrLKXNWdPb21yXuObiJ/b0TqIaG5P0IqFmhPz0f6c8l/ewVdQOoQ+dzsBrmT9mk71iTEtZZgCT4dOOzyPhPu9G8L5+zIvWjNAix1Cxttwr5QnUXD9KbNmPwg2h2zLCy0bFpV2H9yGaunA7/SA6Qvz9yTl3pQk2S4A/LzlB5WHQcbw2vJwDdbvkNf5X/MPf8D7WbVAYHmUmvS1AESgB+pgjqcQhcChAYk7a6nL+PSXir2x2q5Bmx3UWrjgXWOJtQ2g3uVQe4upS69xLfK25gKXRzUYrwvwZfyRnpp/9wnxwz8kWGeep+CwXX5zqLN46ubiSrisEJLzinTRMYuvZKWkOtdTpG+UyPi1r58InCIRHeGgnN8Wj6JD2eRYlbhztkvFOge/X2koup3nGDxzbL5ODftrx/yR+u/KekfEsKWOmqHu+5JvC44t++sk7e+RKity+Q3VTLlxf67fq5jXFoXCp5d4L42Gz08y+PY0kResDRjAlyBJayY+Vjq7xSq1PG6+o+3hTUK3hfDh9jWBDi14YeotHLELINRsjxjQha8Ahbdgoi3RtLWijwfM/n1ctqyEubedksd9I7Y7hlKC//YncLsQaMUS5jijodp0x+N35mB2gPSjMIQw21KHfvjGXPGa5MzOZM93ARMtV4X1aTyO8b3nw=
+    before_install:
+    - cd client
+    - npm install
+    - npm install -g vue-cli
+    script:
+    - npm run lint
+    - npm runt build
+    before_deploy:
+    - openssl aes-256-cbc -K $encrypted_c203fb406a06_key -iv $encrypted_c203fb406a06_iv
+      -in deploy_rsa.enc -out /tmp/deploy_rsa -d
+    - eval "$(ssh-agent -s)"
+    - chmod 600 /tmp/deploy_rsa
+    - ssh-add /tmp/deploy_rsa
+    deploy:
+      provider: script
+      skip_cleanup: true
+      script: ssh -p22 $DEPLOY_USER@$DEPLOY_HOST "mkdir -p $CLIENT_DIR/_tmp"
+      on:
+        branch: master
+  - name: Server
+    language: node_js
+    node_js:
+    - '10'
+    env:
+      global:
+      - JOBS=1
+      - secure: cJXTInMsuzWjxHhi1nLYqF1Q+QTe6+6nxF2s7SArhnBBdmMyeLCU0bJb6Lma603InimF6Qtvxj3F6XFZyp7SYW0M9VNcopraDiGdwFOfmKuQsIBwiGbuljKndAoB8tZKt3QIPhtrML5wCNZsnRZpC9Hxz9bdcEZEAA7zooDQxm/A+OpSWABmdnAg2O9QM+bcYz/zJA+Y5nvdOaapKc1NVi2icJ7a7WuXfgpsTMDMo7XqKt++i6czaZMfTKOowsevsd32yAHPXhHfwPaleNU0Bc8MlG0GTmm3Dej2NNo+hqyF4mkICgbQHIc1LQNHnR3XQGvuxabM4MEuwb8rExQWRREPFPLHvLlxyB1WgiRbFipmbE3Nr7opMk/arBg5LtMg75WUcGFhPoYIBesAALEY3R/CzwFZYX0GMyR6/dsgJRgHKmDFOJfDIF/3WCjo0W4llyS29pyjpirf9u1vNmK/Fkq1yvKU7n9lbk89TfRAbGrUXwXf7tH7bfshbMvK5BW3pFxpNDO6dIzosRNCMhAsMvA5hN0aW2OikSABMEKa0gR4Z6lIAVHVgg0H59Xp+Wv2gjnpHwRLzjOUMNBMRgAbPewEq5uZaW06s4zW1dYHUDfByB/gYzDh9ZwVQI0TNu2rsfaHVUrayZx3Z4CCnVjiwUvu4VXuam1yr7i6NJ8dyoI=
+      - secure: AsyyvLc2BvG4rvoifNJnMX1QI5JQp6pv122IJ+hrIedwnOkYleiM5ytkFLDaosQ3IkQK5NFwxcDiaE/M7LgfgUvPOY1d51Z9QBX6J7TXFz5XdQ4ap8pmr68MCtO3n/5ISE/EsGS/fwmwG/4/JMQPpdpxu7kGlMkUuKETrwVWsQG/c/VWonf0bsqNy4zEaxLK11HJmwChSI3GSRIuGFGBEPE91sxivTqMrCfbJPVLvLyDseukOWbv4s8RMp5DM5tGp0n4MJevcZf0DAeenyZbjOSTzPll6lZbtYXk9+Z7JXHP2bQi6M7GG+VnBiVPdX5gYhbPFrpubU3YxUV0LQlQ+BA1Kq7uwdvX4w8m418QCnm2Pctc231FXq7+BTuO8/R6dm7jITRkMc+GffVsBXoQrHKhJdo2VaWiJ1HrklJqnBx6NkuNav9MFZ5fxqTGFTKCUxkXenyDrnn00s8zSFuAACw9SWRgqZWQm1cREMWhWYOtPUU5C826Sxi0sj/ik2SPSFvo7ia8lKAg1gji8Y88sdSxtJcX0pdol/vY6bae5oPCNZgmfEItlUb6EL/moY6zJrZB5yUhYFFb2yD02nNfEKmMtWc++ovVUfeVakVkqjCF6E9qhVRixnG8hD66w8Y9gO6zqx2bSldHMx7nMh03lIBlGP9KzOKDMnirVVyzSSk=
+      - secure: DWeMAvmonnh5IwJL8hEpYr5AyQZRFZJ1WQs05pkLr3Ea12iZJCuWQCNMb8iNxN9FzHPIuCik/ACvLP4IfPlVVWTTOrkhudPiGbxsSypZTFOWXYfYDKgc/5HL++imxPYSoGBOZ+IkDbNMWhSI6/zFtVgleEDuZcYpXJ1xf3Zi8EOeJOczUrNruTszdRcTWDhfhiiU0kRlO7a1tYUpBCJpcDpt8LVziAhSZ2DnUeD63SQLxSDnZp3iSWVVl255eBWfBfGT1GUN7Q7H1UfZsleKDAZ0JZt4KnjxtWaEfNhZEEw5xwdWEfWUVoJThnoXAIHhEiXwDuoYSOnNXkjX78g3mApdinD/+W7zyzxFhuAcV9xlDHObJFWIX/uPYgY7jcjPFEEfRD1JfmT6M61EOkmAlcUbrbAJxQDZSMMw8baZ+9Ryt9OeyzNmyXy1E5mBlOQtV8zgAlnZ/0ftz58xJhtw76XT+JYAJlcZIN9/Hq8IJ4C1Z43Us9wE9Sc2nDmF71LFRoXNWzWuhGvbclPQlZvx3siEfFOK+0AFt4BOg9f2ZgP6VTBaceIt9f3DlHD/RPwB6GrIEEEjIKb3Ler33mqZptdVkUhQpGCWT+YEypg8UefEULajOiAvgFQUDuBPvyn/fzhKQM4OXHAeqdJ2TBZjNTMYOjJCsCjvoRK2/aV3iGE=
+    before_install:
+    - cd api
+    - npm install
+    before_deploy:
+    - openssl aes-256-cbc -K $encrypted_c203fb406a06_key -iv $encrypted_c203fb406a06_iv
+      -in deploy_rsa.enc -out /tmp/deploy_rsa -d
+    - eval "$(ssh-agent -s)"
+    - chmod 600 /tmp/deploy_rsa
+    - ssh-add /tmp/deploy_rsa
+    deploy:
+      provider: script
+      skip_cleanup: true
+      script: ssh -p22 $DEPLOY_USER@$DEPLOY_HOST "mkdir -p $SERVER_DIR/_tmp"
+      on:
+        branch: master
