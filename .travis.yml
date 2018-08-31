@@ -18,8 +18,9 @@ matrix:
     - npm run lint
     - npm run build
     before_deploy:
-    - openssl aes-256-cbc -K $encrypted_c203fb406a06_key -iv $encrypted_c203fb406a06_iv
-      -in $TRAVIS_BUILD_DIR/deploy_rsa.enc -out /tmp/deploy_rsa -d
+    - echo -e "Building master branch - Deploying client..."
+    - echo $DEPLOY_HOST 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEA3GjJpKzSA2ljAzu0I0jETK+cq0licx7PbnDBPIFlaeKOGrEbpLxoH4nM03bfLqj1ymuJv0kwf2M9JiYheeEgLzBwzB26/W2iIj+ojksQJkJVt10EI7esl+mISQeKxHEWzjxLZx8498P+/kOMtI6WQbgT/byanaEgUztNdFCYpx2QVcwPxEAxqEtIfMQZPHrGrMqnaEQ+dV5oM/Qj0+MmmG7lmOa3flS4StjRjKbgoTRNi8Zk97z1eo6liwU8NTdU5bAUtja+7jPcqljRmoqKo2nZFsKnZ+aDYTRXp08sCBujh98dH2cxeu7wcgcAm96f/uPyOTBz8qz0+AgYS/TbV2jMqDI/qKMZ9MR89tNapbpF4XBc9gbq9ZT7G9+KbyRbGSMrZkSZNmm9OoNH8kDyOxOxjwlMLxjxqWgUqSsr+gLyqW2Cp1Dw7h80AofTG1ksdSRq8/AtPdXoivJXCEQwCLbFCQAZGJG/U67LS+6fwOwwessQSj6xuYY068D81KUSTvBus2hbG3EiGPHhv+S0WH1VdymE1kNcB6T9knTWb4ElrPWFOI7Awcei2rIWR+80ADMhbCnM9F3wzH2aQPnV6oexU92CeeeusaBkQd6Tm+J+bwhmlOVqZ4aGjWWyLMZgttJ65gIHlIqDQKFqeubypnIWTq2sW8LgwiQkK9woz60=' >> $HOME/.ssh/known_hosts
+    - openssl aes-256-cbc -K $encrypted_c203fb406a06_key -iv $encrypted_c203fb406a06_iv -in $TRAVIS_BUILD_DIR/deploy_rsa.enc -out /tmp/deploy_rsa -d
     - eval "$(ssh-agent -s)"
     - chmod 600 /tmp/deploy_rsa
     - ssh-add /tmp/deploy_rsa
@@ -41,8 +42,9 @@ matrix:
       - secure: DWeMAvmonnh5IwJL8hEpYr5AyQZRFZJ1WQs05pkLr3Ea12iZJCuWQCNMb8iNxN9FzHPIuCik/ACvLP4IfPlVVWTTOrkhudPiGbxsSypZTFOWXYfYDKgc/5HL++imxPYSoGBOZ+IkDbNMWhSI6/zFtVgleEDuZcYpXJ1xf3Zi8EOeJOczUrNruTszdRcTWDhfhiiU0kRlO7a1tYUpBCJpcDpt8LVziAhSZ2DnUeD63SQLxSDnZp3iSWVVl255eBWfBfGT1GUN7Q7H1UfZsleKDAZ0JZt4KnjxtWaEfNhZEEw5xwdWEfWUVoJThnoXAIHhEiXwDuoYSOnNXkjX78g3mApdinD/+W7zyzxFhuAcV9xlDHObJFWIX/uPYgY7jcjPFEEfRD1JfmT6M61EOkmAlcUbrbAJxQDZSMMw8baZ+9Ryt9OeyzNmyXy1E5mBlOQtV8zgAlnZ/0ftz58xJhtw76XT+JYAJlcZIN9/Hq8IJ4C1Z43Us9wE9Sc2nDmF71LFRoXNWzWuhGvbclPQlZvx3siEfFOK+0AFt4BOg9f2ZgP6VTBaceIt9f3DlHD/RPwB6GrIEEEjIKb3Ler33mqZptdVkUhQpGCWT+YEypg8UefEULajOiAvgFQUDuBPvyn/fzhKQM4OXHAeqdJ2TBZjNTMYOjJCsCjvoRK2/aV3iGE=
     script: 'true'
     before_deploy:
-    - openssl aes-256-cbc -K $encrypted_c203fb406a06_key -iv $encrypted_c203fb406a06_iv
-      -in $TRAVIS_BUILD_DIR/deploy_rsa.enc -out /tmp/deploy_rsa -d
+    - echo -e "Building master branch - Deploying server..."
+    - echo $DEPLOY_HOST 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEA3GjJpKzSA2ljAzu0I0jETK+cq0licx7PbnDBPIFlaeKOGrEbpLxoH4nM03bfLqj1ymuJv0kwf2M9JiYheeEgLzBwzB26/W2iIj+ojksQJkJVt10EI7esl+mISQeKxHEWzjxLZx8498P+/kOMtI6WQbgT/byanaEgUztNdFCYpx2QVcwPxEAxqEtIfMQZPHrGrMqnaEQ+dV5oM/Qj0+MmmG7lmOa3flS4StjRjKbgoTRNi8Zk97z1eo6liwU8NTdU5bAUtja+7jPcqljRmoqKo2nZFsKnZ+aDYTRXp08sCBujh98dH2cxeu7wcgcAm96f/uPyOTBz8qz0+AgYS/TbV2jMqDI/qKMZ9MR89tNapbpF4XBc9gbq9ZT7G9+KbyRbGSMrZkSZNmm9OoNH8kDyOxOxjwlMLxjxqWgUqSsr+gLyqW2Cp1Dw7h80AofTG1ksdSRq8/AtPdXoivJXCEQwCLbFCQAZGJG/U67LS+6fwOwwessQSj6xuYY068D81KUSTvBus2hbG3EiGPHhv+S0WH1VdymE1kNcB6T9knTWb4ElrPWFOI7Awcei2rIWR+80ADMhbCnM9F3wzH2aQPnV6oexU92CeeeusaBkQd6Tm+J+bwhmlOVqZ4aGjWWyLMZgttJ65gIHlIqDQKFqeubypnIWTq2sW8LgwiQkK9woz60=' >> $HOME/.ssh/known_hosts
+    - openssl aes-256-cbc -K $encrypted_c203fb406a06_key -iv $encrypted_c203fb406a06_iv -in $TRAVIS_BUILD_DIR/deploy_rsa.enc -out /tmp/deploy_rsa -d
     - eval "$(ssh-agent -s)"
     - chmod 600 /tmp/deploy_rsa
     - ssh-add /tmp/deploy_rsa
