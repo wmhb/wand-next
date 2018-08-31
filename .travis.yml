@@ -53,8 +53,6 @@ matrix:
       skip_cleanup: true
       script: >-
         ssh -p22 $DEPLOY_USER@$DEPLOY_SERVER "mkdir -p $SERVER_DIR/_tmp" &&
-        echo "STOP SERVER AND REMOVE OLD SERVER FILES" &&
-        ssh -p22 $DEPLOY_USER@$DEPLOY_SERVER "cd $SERVER_DIR && rm -r !(config.js|node_modules|_tmp)" &&
         echo "RSYNC SERVER" &&
         rsync -rav -e ssh --exclude='.git/' --exclude=.DS_Store --delete-excluded $TRAVIS_BUILD_DIR/api/dist/server.js $TRAVIS_BUILD_DIR/api/package.json $DEPLOY_USER@$DEPLOY_SERVER:$SERVER_DIR/_tmp &&
         echo "INSTALL NEW DEPS" &&
