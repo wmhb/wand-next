@@ -21,7 +21,7 @@ module.exports = {
   parallel: undefined,
   css: undefined,
 
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     const svgRule = config.module.rule('svg')
 
     // clear all existing loaders.
@@ -32,6 +32,6 @@ module.exports = {
     // add replacement loader(s)
     svgRule
       .use('vue-svg-loader')
-        .loader('vue-svg-loader')
+      .loader('vue-svg-loader')
   }
 }

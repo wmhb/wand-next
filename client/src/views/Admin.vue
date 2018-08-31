@@ -90,8 +90,8 @@ export default {
   },
   created() {
     Axios.get(`${this.$store.getters.config.APIAuthBasePath}/check`)
-      .catch((e) => {
-        console.log(e.status)
+      .catch(() => {
+        // console.log(e.status)
       })
     Axios.get(`${this.$store.getters.config.APISpeakersUrl}`)
       .then(({ data }) => {

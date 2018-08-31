@@ -4,8 +4,7 @@
   "description": "node.js portion of wand-next",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "LOG_LEVEL=info nodemon index.js"
   },
   "author": "Dennis Gieseler",
   "license": "MIT",
