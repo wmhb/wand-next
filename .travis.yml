@@ -27,11 +27,10 @@ matrix:
     deploy:
       provider: script
       skip_cleanup: true
-      script:
-        - |
-           ssh -p22 $DEPLOY_USER@$DEPLOY_SERVER "mkdir -p $CLIENT_DIR/_tmp" &&
-           echo -e "RSYNC FRONTEND" &&
-           rsync -rav -e ssh --exclude='.git/' --exclude=.DS_Store --delete-excluded $TRAVIS_BUILD_DIR/frontend/dist/* $DEPLOY_USER@$DEPLOY_SERVER:$CLIENT_DIR/_tmp
+      script: >-
+         ssh -p22 $DEPLOY_USER@$DEPLOY_SERVER "mkdir -p $CLIENT_DIR/_tmp" &&
+         echo -e "RSYNC FRONTEND" &&
+         rsync -rav -e ssh --exclude='.git/' --exclude=.DS_Store --delete-excluded $TRAVIS_BUILD_DIR/frontend/dist/* $DEPLOY_USER@$DEPLOY_SERVER:$CLIENT_DIR/_tmp
       on:
         branch: master
   - name: Server
@@ -50,10 +49,9 @@ matrix:
     deploy:
       provider: script
       skip_cleanup: true
-      script:
-        - |
-           ssh -p22 $DEPLOY_USER@$DEPLOY_SERVER "mkdir -p $SERVER_DIR/_tmp" &&
-           echo -e "RSYNC SERVER" &&
-           rsync -rav -e ssh --exclude='.git/' --exclude=.DS_Store --delete-excluded $TRAVIS_BUILD_DIR/api/dist/server.js $TRAVIS_BUILD_DIR/api/package.json $DEPLOY_USER@$DEPLOY_SERVER:$SERVER_DIR/_tmp
+      script: >-
+         ssh -p22 $DEPLOY_USER@$DEPLOY_SERVER "mkdir -p $SERVER_DIR/_tmp" &&
+         echo -e "RSYNC SERVER" &&
+         rsync -rav -e ssh --exclude='.git/' --exclude=.DS_Store --delete-excluded $TRAVIS_BUILD_DIR/api/dist/server.js $TRAVIS_BUILD_DIR/api/package.json $DEPLOY_USER@$DEPLOY_SERVER:$SERVER_DIR/_tmp
       on:
         branch: master
