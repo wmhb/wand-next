@@ -9,12 +9,16 @@ const stateMgr = require('./lib/stateMgr')
 const twitter = require('./lib/twitter')
 const audio = require('./lib/audio')
 
+const { SERVER_PORT = config.ports.node } = process.env
+const { WS_PORT = config.ports.ws } = process.env
 
 const app = require('express')()
-const server = require('http').Server(app)
-const io = require('socket.io')(server)
+const ws = require('http').Server(app)
+  .listen(WS_PORT, function() {
+    logger.info('[SYSTEM]'.cyan, `WebSocket listening on port %d" ${WS_PORT}`)
+  })
+const io = require('socket.io')(ws)
 
-const { PORT = config.ports.node } = process.env
 
 app.use(auth.initialize())
 
@@ -46,8 +50,8 @@ app.use((err, req, res, next) => {
   })
 })
 
-server.listen(PORT, () => {
-  logger.info('[SYSTEM]'.cyan, `Listening on port ${PORT}`)
+app.listen(SERVER_PORT, () => {
+  logger.info('[SYSTEM]'.cyan, `Listening on port ${SERVER_PORT}`)
 })
 
 const wand = io.of('/wand')

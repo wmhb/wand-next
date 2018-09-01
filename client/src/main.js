@@ -11,7 +11,7 @@ import Auth from './lib/auth'
 const initApp = () => {
   Vue.config.productionTip = true
   const url = Store.getters.config.SiteHost
-  const port = Store.getters.config.ports.node
+  const port = Store.getters.config.ports.ws
   Vue.use(VueSocketio, io(`//${url}:${port}/wand`))
   const token = localStorage.getItem('user-token')
   if (token) {

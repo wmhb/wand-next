@@ -40,7 +40,8 @@ const config = {
     expiration: '2h'
   },
   ports: {
-      node: 61000
+    node: 61000,
+    ws: 62000
   }
 }
 
