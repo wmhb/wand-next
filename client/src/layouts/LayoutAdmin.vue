@@ -57,12 +57,21 @@ form {
   width: 100%;
 }
 
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="button"],
+input[type="submit"] {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
 .form__input {
   width: 100%;
-  font-size: 1em;
-  line-height: 1.25em;
   padding: .5em;
   margin-bottom: .5em;
+  font-size: 1em;
+  line-height: 1.25em;
 }
 
 .btn {
