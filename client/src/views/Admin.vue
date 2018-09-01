@@ -4,7 +4,6 @@
       <div class="logout-container">
         <a @click="logout()">Logout</a>
       </div>
-      <!-- <pre>{{slides}}</pre> -->
 
       <section class="bg-white">
         <h2>Slides</h2>
@@ -194,8 +193,12 @@ $colors-list: $smoothviolet $fatyellow $flashygreen $heavenblue;
 
 h2 {
   margin: 0;
-  padding: 2vw 0;
+  padding: 6vw 0;
   line-height: 1;
+
+  @include mq('sm') {
+    padding: 3vw 0;
+  }
 }
 
 a,
@@ -321,7 +324,7 @@ input[type=text]:focus, textarea:focus {
   justify-content: center;
   align-items: center;
 
-  @include mq('md') {
+  @include mq('sm') {
     height: 9vw;
   }
 
