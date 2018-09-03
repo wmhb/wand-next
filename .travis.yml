@@ -56,6 +56,6 @@ matrix:
         echo "RSYNC SERVER" &&
         rsync -rav -e ssh --exclude='.git/' --exclude=.DS_Store --delete-excluded $TRAVIS_BUILD_DIR/api/dist/server.js $TRAVIS_BUILD_DIR/api/package.json $DEPLOY_USER@$DEPLOY_SERVER:$SERVER_DIR/_tmp &&
         echo "INSTALL NEW DEPS" &&
-        ssh -p22 $DEPLOY_USER@$DEPLOY_SERVER "svc -d ~/service/wand-server && cd $SERVER_DIR && rm -f server.js || true && mv $SERVER_DIR/_tmp/* $SERVER_DIR && rm -rf $SERVER_DIR/_tmp && npm install && svc -u ~/service/wand-server"
+        ssh -p22 $DEPLOY_USER@$DEPLOY_SERVER "cd $SERVER_DIR && rm -f server.js || true && mv $SERVER_DIR/_tmp/* $SERVER_DIR && rm -rf $SERVER_DIR/_tmp && npm install"
       on:
         branch: master
