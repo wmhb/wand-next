@@ -30,7 +30,7 @@ const mapTalkData = (talks, url) => {
 
 const mapEventData = events => {
   let mappedEvents = {};
-  const currentMoment = moment(`${events[0].date}${events[0].dateYear}`, 'DD.MM.YYYY').add('days', 1)
+  const currentMoment = moment(`${events[0].date}${events[0].dateYear}`, 'DD.MM.YYYY').add(1, 'days')
   const noNextEvent = moment().isAfter(currentMoment)
   const event = (noNextEvent && events[1]) ? events[1] : events[0]
   mappedEvents.current = _.mapObject(event, (v, k) => {
