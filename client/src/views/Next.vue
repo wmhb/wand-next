@@ -17,39 +17,35 @@
 </template>
 
 <script>
-import Axios from 'axios'
+import { mapActions, mapGetters } from 'vuex'
 import Layout from '../lib/Layout'
-
-let timer
 
 export default {
   name: 'Next',
   components: {
     Layout
   },
-  mounted() {},
   data() {
     return {
-      nextEvent: {},
       errors: ''
     }
   },
   created() {
     this.$store.dispatch('set_logo_state', false)
-    Axios.get(`${this.$store.getters.config.APINextUrl}`)
-      .then((response) => {
-        // JSON responses are automatically parsed.
-        this.nextEvent = response.data
-        window.clearTimeout(timer)
-        timer = setTimeout(() => {
-          this.calcFit('date')
-        }, 250)
-      })
-      .catch((e) => {
-        this.errors = e.response.data
-      })
+    this.getNextEvent()
+  },
+  mounted() {
+    let timer
+
+    window.clearTimeout(timer)
+    timer = setTimeout(() => {
+      this.calcFit('date')
+    }, 250)
   },
   methods: {
+    ...mapActions([
+      'getNextEvent'
+    ]),
     calcFit(className) {
       const parent = document.getElementsByClassName('next')[0]
       const element = document.querySelectorAll(`.${className} span`)[0]
@@ -76,6 +72,11 @@ export default {
       element.style.lineHeight = null
       parent.style.opacity = 1
     }
+  },
+  computed: {
+    ...mapGetters([
+      'nextEvent'
+    ])
   },
   sockets: {}
 }
