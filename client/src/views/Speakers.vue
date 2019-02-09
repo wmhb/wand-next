@@ -73,7 +73,7 @@ export default {
         const animation = anime.timeline({
           direction: 'forward',
           duration: 500,
-          easing: [0.4, 0.0, 0.2, 1]
+          easing: 'cubicBezier(0.4, 0.0, 0.2, 1)'
         })
 
         animation
