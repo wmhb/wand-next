@@ -14,8 +14,9 @@ module.exports = {
     "function-paren-newline": ["error", "never"],
     "no-underscore-dangle": "off",
     "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state", "context"] }],
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    "no-shadow": ["error", { "allow": ["state"] }],
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn'
   },
   parserOptions: {
     parser: 'babel-eslint'

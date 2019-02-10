@@ -1,5 +1,17 @@
 import Axios from 'axios'
 
+const state = {
+  twitter: {
+    isStreaming: null,
+    hashtag: ''
+  },
+  slides: {
+    isAutoplay: false,
+    active: '',
+    available: []
+  }
+}
+
 const mutations = {
   ADMIN_STATE_CHANGED(state, changedState) {
     Object.assign(state, changedState)
@@ -52,18 +64,6 @@ const actions = {
 const getters = {
   twitter: state => state.twitter,
   slides: state => state.slides
-}
-
-const state = {
-  twitter: {
-    isStreaming: null,
-    hashtag: ''
-  },
-  slides: {
-    isAutoplay: false,
-    active: '',
-    available: []
-  }
 }
 
 export default {

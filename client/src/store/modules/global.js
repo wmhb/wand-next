@@ -1,6 +1,23 @@
 import Axios from 'axios'
 import Auth from '@/lib/auth'
 
+const state = {
+  token: localStorage.getItem('user-token') || '',
+  status: '',
+  config: {},
+  events: {
+    next: {}
+  },
+  soundcloud: {
+    url: '',
+    apiKey: '',
+    data: [],
+    type: '',
+    isPlaying: false
+  },
+  isLogoInverted: false
+}
+
 const mutations = {
   SET_CONFIG(state, config) {
     state.config = config
@@ -9,6 +26,9 @@ const mutations = {
     Object.assign(state.soundcloud, {
       [key]: val
     })
+  },
+  SET_NEXT_EVENT(state, event) {
+    state.events.next = event
   },
   AUTH_REQUEST(state) {
     state.status = 'loading'
@@ -43,6 +63,12 @@ const actions = {
         commit('SET_SC', { key: 'url', val: data.url })
         commit('SET_SC', { key: 'data', val: data.data })
         commit('SET_SC', { key: 'type', val: data.data.kind })
+      })
+  },
+  getNextEvent({ commit }) {
+    Axios.get(`${this.getters.config.APINextUrl}`)
+      .then(({ data }) => {
+        commit('SET_NEXT_EVENT', data)
       })
   },
   auth_request({ commit }, user) {
@@ -85,21 +111,8 @@ const getters = {
   authStatus: state => state.status,
   // Config
   config: state => state.config,
-  soundcloud: state => state.soundcloud
-}
-
-const state = {
-  token: localStorage.getItem('user-token') || '',
-  status: '',
-  config: {},
-  soundcloud: {
-    url: '',
-    apiKey: '',
-    data: [],
-    type: '',
-    isPlaying: false
-  },
-  isLogoInverted: false
+  soundcloud: state => state.soundcloud,
+  nextEvent: state => state.events.next
 }
 
 export default {
