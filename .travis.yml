@@ -38,6 +38,8 @@ matrix:
   - name: Server
     before_install:
     - cd api
+    - npx npm-force-resolutions
+    - npm prune
     - npm install
     script:
     - npm run build
