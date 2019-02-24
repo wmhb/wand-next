@@ -70,4 +70,3 @@ export default {
   margin-bottom: .5em;
 }
 </style>
-

@@ -59,8 +59,7 @@ export default {
       element.style.fontSize = `${fontSize}vmin`
 
       while (
-        element.offsetWidth <= parent.offsetWidth &&
-        fontSize < 40
+        element.offsetWidth <= parent.offsetWidth && fontSize < 40
       ) {
         fontSize += stepSize
         element.style.fontSize = `${fontSize}vmin`
@@ -117,4 +116,3 @@ export default {
   color: $blue;
 }
 </style>
-

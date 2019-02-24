@@ -1,5 +1,5 @@
 import SoundCloudAudio from 'soundcloud-audio'
-import Store from './../store'
+import Store from '@/store'
 
 let player
 const url = {}
