@@ -52,7 +52,7 @@ export default {
   },
   created() {
     this.changeLogoBg()
-    Axios.get(`${this.$store.getters.config.APISpeakersUrl}`)
+    Axios.get(`${this.$store.getters.config.APICurrentEventUrl}`)
       .then(({ data }) => {
         this.talks = data.talks
       })

@@ -16,22 +16,23 @@ const mutations = {
   ADMIN_STATE_CHANGED(state, changedState) {
     Object.assign(state, changedState)
   }
+
 }
 
 const actions = {
   admin_getState() {
     Axios.get(`${this.getters.config.APIAuthBasePath}/state`)
   },
-  admin_stateChange(context, state) {
-    context.commit('ADMIN_STATE_CHANGED', state)
+  admin_stateChange({ commit }, state) {
+    commit('ADMIN_STATE_CHANGED', state)
     if ('isPlaying' in state.soundcloud) {
-      context.commit('SET_SC', { key: 'isPlaying', val: state.soundcloud.isPlaying })
+      commit('SET_SC', { key: 'isPlaying', val: state.soundcloud.isPlaying })
     }
     if ('data' in state.soundcloud) {
-      context.commit('SET_SC', { key: 'data', val: state.soundcloud.data })
+      commit('SET_SC', { key: 'data', val: state.soundcloud.data })
     }
     if ('url' in state.soundcloud) {
-      context.commit('SET_SC', { key: 'url', val: state.soundcloud.url })
+      commit('SET_SC', { key: 'url', val: state.soundcloud.url })
     }
   },
   admin_setSlide(context, slide) {

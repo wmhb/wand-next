@@ -34,14 +34,6 @@ export default {
     this.$store.dispatch('set_logo_state', false)
     this.getNextEvent()
   },
-  mounted() {
-    let timer
-
-    window.clearTimeout(timer)
-    timer = setTimeout(() => {
-      this.calcFit('date')
-    }, 250)
-  },
   methods: {
     ...mapActions([
       'getNextEvent'
@@ -59,23 +51,33 @@ export default {
       element.style.fontSize = `${fontSize}vmin`
 
       while (
-        element.offsetWidth <= parent.offsetWidth && fontSize < 40
+        element.offsetWidth <= parent.offsetWidth && fontSize < 60
       ) {
         fontSize += stepSize
         element.style.fontSize = `${fontSize}vmin`
       }
 
-      element.style.fontSize = `${fontSize}vmin`
+      this.$nextTick(() => {
+        element.style.display = null
+        element.style.lineHeight = null
+        parent.style.opacity = 1
+        parent.style.transform = 'translate3d(0, 0, 0)'
+      })
 
-      element.style.display = null
-      element.style.lineHeight = null
-      parent.style.opacity = 1
+
     }
   },
   computed: {
     ...mapGetters([
       'nextEvent'
     ])
+  },
+  watch: {
+    nextEvent: function (newVal, oldVal) {
+      if (newVal !== oldVal && oldVal) {
+        this.calcFit('date')
+      }
+    }
   },
   sockets: {}
 }
@@ -89,10 +91,12 @@ export default {
   justify-content: center;
 }
 .next {
-  max-width: 75vw;
+  display: block;
+  width: 75%;
   font-weight: 700;
   opacity: 0;
-  transition: opacity 500ms linear;
+  transform: translate3d(0, 5vw, 0);
+  transition: transform 1s $ease-cb, opacity 1s linear 250ms;
 }
 
 .date,
