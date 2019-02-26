@@ -29,19 +29,16 @@ const mapTalkData = (talks, url) => {
 }
 
 const mapEventData = events => {
-  let mappedEvents = {};
-  const currentMoment = moment(`${events[0].date}${events[0].dateYear}`, 'DD.MM.YYYY').add(1, 'days')
-  const noNextEvent = moment().isAfter(currentMoment)
-  const event = (noNextEvent && events[1]) ? events[1] : events[0]
-  mappedEvents.current = _.mapObject(event, (v, k) => {
-    if (k === 'talks') {
-      return mapTalkData(v, event.url)
-    } else {
-      return v
-    }
-  })
-
-  mappedEvents.next = (events.length > 1 && !noNextEvent) ? events[1] : undefined
+  let mappedEvents = {
+    current: _.mapObject(events[0], (v, k) => {
+      if (k === 'talks') {
+        return mapTalkData(v, events[0].url)
+      } else {
+        return v
+      }
+    }),
+    next: (events.length > 1) ? events[1] : undefined
+  };
 
   return mappedEvents
 }
