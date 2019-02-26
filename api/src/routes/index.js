@@ -21,8 +21,8 @@ router.get('/config',
       SiteHost: config.SiteHost,
       APIUrl: config.APIUrl,
       APIAuthBasePath: config.APIUrl + config.APIAuthBasePath,
-      APISpeakersUrl: config.APIUrl + config.APIEventsUrl + '/speakers',
-      APINextUrl: config.APIUrl + config.APIEventsUrl + '/next',
+      APICurrentEventUrl: config.APIUrl + config.APIEventsUrl + '/current',
+      APINextEventUrl: config.APIUrl + config.APIEventsUrl + '/next',
       APILoginUrl: config.APIUrl + config.APILoginUrl,
       APIAuthUrl: config.APIUrl + config.APIAuthUrl,
       ports: config.ports,
@@ -34,7 +34,7 @@ router.get('/config',
 /**
  * GET Events - Current
  */
-router.get('/event/speakers', async (req, res) => {
+router.get('/event/current', async (req, res) => {
   try {
     let ev = await events.getEvents(true)
     res.status(200).send(ev.current)

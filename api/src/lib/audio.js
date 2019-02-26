@@ -61,14 +61,14 @@ const sc = {
         sc.resolve(reqUrl)
         .then(({ data })=> {
           mapAndSetState(data)
-          resolve({success: true})
+          return resolve({success: true})
         })
         .catch(err => {
-          logger.warn('[AUDIO][SOUNDCLOUD]'.cyan, 'Resolver responded with Error:', err.response)
-          reject(err)
+          logger.warn('[AUDIO][SOUNDCLOUD]'.cyan, 'Resolver responded with Error:', err.response.status)
+          return reject({success:false})
         })
       } else {
-        resolve({success: true})
+        return resolve({success: true})
       }
     })
   },
@@ -76,10 +76,10 @@ const sc = {
     return new Promise((resolve, reject) => {
       Axios.get(`https://api.soundcloud.com/resolve?url=${url}&client_id=${config.soundcloud.apiKey}`)
         .then((resp) => {
-          resolve(resp)
+          return resolve(resp)
         })
         .catch((err) => {
-          reject(err)
+          return reject(err)
         })
     })
   },

@@ -57,7 +57,7 @@ const actions = {
     commit('SET_SC', { key, val })
   },
   getSoundcloudData({ commit }) {
-    Axios.post(`${this.getters.config.APIAuthBasePath}/audio/music/data`)
+    Axios.get(`${this.getters.config.APIAuthBasePath}/audio/music/data`)
       .then(({ data }) => {
         commit('SET_SC', { key: 'isPlaying', val: data.isPlaying })
         commit('SET_SC', { key: 'url', val: data.url })
@@ -66,7 +66,7 @@ const actions = {
       })
   },
   getNextEvent({ commit }) {
-    Axios.get(`${this.getters.config.APINextUrl}`)
+    Axios.get(`${this.getters.config.APINextEventUrl}`)
       .then(({ data }) => {
         commit('SET_NEXT_EVENT', data)
       })

@@ -91,12 +91,11 @@ export default {
     Axios.get(`${this.$store.getters.config.APIAuthBasePath}/check`)
       .catch(() => {
       })
-    Axios.get(`${this.$store.getters.config.APISpeakersUrl}`)
+    Axios.get(`${this.$store.getters.config.APICurrentEventUrl}`)
       .then(({ data }) => {
         this.talks = data.talks
       })
-      .catch((e) => {
-        this.errors = e.response
+      .catch(() => {
       })
   },
   data() {

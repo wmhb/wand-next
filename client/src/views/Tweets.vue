@@ -71,7 +71,6 @@ export default {
           this.tweets = data
         })
         .catch(() => {
-          // console.log(e)
         })
     }
   },

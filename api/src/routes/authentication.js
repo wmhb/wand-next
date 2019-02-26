@@ -95,7 +95,7 @@ router.get('/audio/music/toggle', auth.authenticate(),  (req, res) => {
   res.status(200).send()
 })
 
-router.post('/audio/music/data', (req, res) => {
+router.get('/audio/music/data', (req, res) => {
   audio.sc.getTrackInfo(req.body.url)
     .then(() => {
       res.status(200).send(stateMgr.all().soundcloud)
@@ -107,7 +107,7 @@ router.post('/audio/music/data', (req, res) => {
 
 router.post('/audio/music/url', auth.authenticate(), (req, res) => {
   audio.sc.getTrackInfo(req.body.url)
-    .then(res => {
+    .then(() => {
       res.status(200).send(stateMgr.all().soundcloud)
     })
     .catch(() => {

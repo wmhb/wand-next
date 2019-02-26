@@ -10,15 +10,10 @@ const twitter = require('./lib/twitter')
 const audio = require('./lib/audio')
 
 const { SERVER_PORT = config.ports.node } = process.env
-const { WS_PORT = config.ports.ws } = process.env
 
 const app = require('express')()
-const ws = require('http').Server(app)
-  .listen(WS_PORT, function() {
-    logger.info('[SYSTEM]'.cyan, `WebSocket listening on port %d" ${WS_PORT}`)
-  })
-const io = require('socket.io')(ws)
-
+const server = require('http').createServer(app)
+const io = require('socket.io').listen(server)
 
 app.use(auth.initialize())
 
@@ -50,7 +45,7 @@ app.use((err, req, res, next) => {
   })
 })
 
-app.listen(SERVER_PORT, () => {
+server.listen(SERVER_PORT, () => {
   logger.info('[SYSTEM]'.cyan, `Listening on port ${SERVER_PORT}`)
 })
 

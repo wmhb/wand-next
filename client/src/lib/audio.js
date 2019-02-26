@@ -1,5 +1,5 @@
 import SoundCloudAudio from 'soundcloud-audio'
-import Store from './../store'
+import Store from '@/store'
 
 let player
 const url = {}
@@ -15,7 +15,6 @@ const audio = {
           gongPlayPromise
             .then(() => {})
             .catch(() => {
-              // console.log('[audio][gong]', 'Gong responded with ', error)
             })
         }
       } else {
@@ -58,7 +57,6 @@ const audio = {
         audioPlayPromise
           .then(() => {})
           .catch(() => {
-            // console.log('[audio][soundcloud]', 'Soundcloudplayer responded with ', error)
           })
       }
     },
