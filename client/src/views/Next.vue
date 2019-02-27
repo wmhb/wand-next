@@ -63,8 +63,6 @@ export default {
         parent.style.opacity = 1
         parent.style.transform = 'translate3d(0, 0, 0)'
       })
-
-
     }
   },
   computed: {
@@ -73,7 +71,7 @@ export default {
     ])
   },
   watch: {
-    nextEvent: function (newVal, oldVal) {
+    nextEvent(newVal, oldVal) {
       if (newVal !== oldVal && oldVal) {
         this.calcFit('date')
       }
