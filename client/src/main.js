@@ -12,7 +12,7 @@ const initApp = () => {
   Vue.config.productionTip = true
   const url = Store.getters.config.SiteHost
   const port = Store.getters.config.ports.node
-  Vue.use(VueSocketio, io(`//${url}:${port}/wand`))
+  Vue.use(VueSocketio, io(`//${url}:${port}/api/wand`))
   const token = localStorage.getItem('user-token')
   if (token) {
     Axios.defaults.headers.common.Authorization = Auth.getAuthHeader()
