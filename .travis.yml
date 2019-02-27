@@ -19,7 +19,7 @@ matrix:
     - npm run build
     before_deploy:
     - echo -e "Building master branch - Deploying client..."
-    - ssh-keyscan -t $TRAVIS_SSH_KEY_TYPES -H $DEPLOY_SERVER 2>&1 | tee -a $HOME/.ssh/known_hosts
+    - echo $DEPLOY_SERVER 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC6moWj2SpEtZFTkDu57pWRLIjkuWBOjxWXxcqVaHgYY+pXRlwJBEhlLfc3Aoz0xPxrUk4k/PgtmyTUfinsoC/XKjI7hJql8MKa92eL9Zug/f/lEooFG5awLmikVYmePDfxr23Hw1Ti83oHBrljj17B+0wAPY8gNf+GuuB0n63x7idX35fhhj8R+FzynMObUM1Vqglxm2Q55Z9YJv02HmNc/bQD+XZlDKhaw2DruP/eko6pvcR2gSy4zyWefLHdni4qk8qhZ73wIyiLBSfhhBFNOIZGEdvbjoxI1ddvWao7X5X2xmRNalWJfSiKFw6PoZdtzRKXN6PRoGGAEVxTmEYI9M6jkAdUhxb4VFlWPkAUTIW+AJu90mARDqkKiKxWydg9z0su/2PMkGXh8c+toa/Xz3FqbNuhbCzFovvaTQbWwyBo/v//DkhMlYE6tKyBm8LYBc5/QH0y384hEGqqwO0KVK/KXl5Ap4r/6BT4l5kGuhBrBVixXPxBaQHGi7mwa95JZlLfe2N18ZizK9Vkvjy3H+baCCkmgfY6tvbgUH5xHcxFIZOP5Et8NpPTx0As8K3QFXq4KxlRzjVn+zFdsuO0TSPyWJ7P0nWcc/o8GWFXmRfJH8xQmMLbMJuNwbZjPoqkWYKyKy5tnH/M+pKh2xwKvpW83Q5FE5c0+YDlbXAxHQ==' >> $HOME/.ssh/known_hosts
     - openssl aes-256-cbc -K $encrypted_c203fb406a06_key -iv $encrypted_c203fb406a06_iv -in $TRAVIS_BUILD_DIR/deploy_rsa.enc -out /tmp/deploy_rsa -d
     - eval "$(ssh-agent -s)"
     - chmod 600 /tmp/deploy_rsa
@@ -45,7 +45,7 @@ matrix:
     - npm run build
     before_deploy:
     - echo "Building master branch - Deploying server..."
-    - ssh-keyscan -t $TRAVIS_SSH_KEY_TYPES -H $DEPLOY_SERVER 2>&1 | tee -a $HOME/.ssh/known_hosts
+    - echo $DEPLOY_SERVER 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC6moWj2SpEtZFTkDu57pWRLIjkuWBOjxWXxcqVaHgYY+pXRlwJBEhlLfc3Aoz0xPxrUk4k/PgtmyTUfinsoC/XKjI7hJql8MKa92eL9Zug/f/lEooFG5awLmikVYmePDfxr23Hw1Ti83oHBrljj17B+0wAPY8gNf+GuuB0n63x7idX35fhhj8R+FzynMObUM1Vqglxm2Q55Z9YJv02HmNc/bQD+XZlDKhaw2DruP/eko6pvcR2gSy4zyWefLHdni4qk8qhZ73wIyiLBSfhhBFNOIZGEdvbjoxI1ddvWao7X5X2xmRNalWJfSiKFw6PoZdtzRKXN6PRoGGAEVxTmEYI9M6jkAdUhxb4VFlWPkAUTIW+AJu90mARDqkKiKxWydg9z0su/2PMkGXh8c+toa/Xz3FqbNuhbCzFovvaTQbWwyBo/v//DkhMlYE6tKyBm8LYBc5/QH0y384hEGqqwO0KVK/KXl5Ap4r/6BT4l5kGuhBrBVixXPxBaQHGi7mwa95JZlLfe2N18ZizK9Vkvjy3H+baCCkmgfY6tvbgUH5xHcxFIZOP5Et8NpPTx0As8K3QFXq4KxlRzjVn+zFdsuO0TSPyWJ7P0nWcc/o8GWFXmRfJH8xQmMLbMJuNwbZjPoqkWYKyKy5tnH/M+pKh2xwKvpW83Q5FE5c0+YDlbXAxHQ==' >> $HOME/.ssh/known_hosts
     - openssl aes-256-cbc -K $encrypted_c203fb406a06_key -iv $encrypted_c203fb406a06_iv -in $TRAVIS_BUILD_DIR/deploy_rsa.enc -out /tmp/deploy_rsa -d
     - eval "$(ssh-agent -s)"
     - chmod 600 /tmp/deploy_rsa
