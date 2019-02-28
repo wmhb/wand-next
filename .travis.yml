@@ -62,6 +62,6 @@ matrix:
         echo "INSTALL NEW DEPS" &&
         ssh -p22 $DEPLOY_USER@$DEPLOY_SERVER "cd $SERVER_DIR && rm -f server.js || true && mv $SERVER_DIR/_tmp/* $SERVER_DIR && rm -rf $SERVER_DIR/_tmp && npm install"
         echo "STARTING WAND-SERVER SERVICE" &&
-        ssh -p22 $DEPLOY_USER@$DEPLOY_SERVER "supervisorctl start wand-server" &&
+        ssh -p22 $DEPLOY_USER@$DEPLOY_SERVER "supervisorctl start wand-server"
       on:
         branch: master
