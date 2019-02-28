@@ -11,7 +11,7 @@ import Auth from './lib/auth'
 const initApp = () => {
   Vue.config.productionTip = true
   const url = Store.getters.config.SiteHost
-  Vue.use(VueSocketio, io(`//${url}:/wand`, { path: '/api/socket.io' }))
+  Vue.use(VueSocketio, io(`//${url}/wand`, { path: '/api/socket.io' }))
   const token = localStorage.getItem('user-token')
   if (token) {
     Axios.defaults.headers.common.Authorization = Auth.getAuthHeader()
