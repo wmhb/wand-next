@@ -55,9 +55,13 @@ matrix:
       skip_cleanup: true
       script: >-
         ssh -p22 $DEPLOY_USER@$DEPLOY_SERVER "mkdir -p $SERVER_DIR/_tmp" &&
+        echo "STOPPING WAND-SERVER SERVICE" &&
+        ssh -p22 $DEPLOY_USER@$DEPLOY_SERVER "supervisorctl stop wand-server" &&
         echo "RSYNC SERVER" &&
         rsync -rav -e ssh --exclude='.git/' --exclude=.DS_Store --delete-excluded $TRAVIS_BUILD_DIR/api/dist/server.js $TRAVIS_BUILD_DIR/api/package.json $DEPLOY_USER@$DEPLOY_SERVER:$SERVER_DIR/_tmp &&
         echo "INSTALL NEW DEPS" &&
         ssh -p22 $DEPLOY_USER@$DEPLOY_SERVER "cd $SERVER_DIR && rm -f server.js || true && mv $SERVER_DIR/_tmp/* $SERVER_DIR && rm -rf $SERVER_DIR/_tmp && npm install"
+        echo "STARTING WAND-SERVER SERVICE" &&
+        ssh -p22 $DEPLOY_USER@$DEPLOY_SERVER "supervisorctl start wand-server" &&
       on:
         branch: master
