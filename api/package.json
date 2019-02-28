@@ -1,7 +1,7 @@
 {
   "name": "wand-next-api",
   "description": "wand-next | nodejs API",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "private": true,
   "main": "index.js",
   "scripts": {
