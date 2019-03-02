@@ -16,6 +16,11 @@ const config = {
         'access_token': 'YOUR_ACCESS_TOKEN',
         'access_token_secret': 'YOUR_ACCESS_TOKEN_SECRET'
       },
+      urls: {
+        'token': 'https://api.twitter.com/oauth2/token',
+        'search': 'https://api.twitter.com/1.1/tweets/search/:product/:label.json'
+      },
+      'isPremium': false,
       'timeout_ms': 60 * 1000,
       'default_hashtag': '#twitter'
   },
