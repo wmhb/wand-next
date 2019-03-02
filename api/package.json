@@ -5,7 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "dev": "LOG_LEVEL=info DEBUG=express:* nodemon ./src/index.js",
+    "dev": "LOG_LEVEL=info nodemon ./src/index.js",
     "build": "webpack --progress --hide-modules --mode production"
   },
   "author": "Dennis Gieseler",

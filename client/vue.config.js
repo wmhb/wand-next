@@ -4,8 +4,11 @@ module.exports = {
     proxy: {
       '/api': {
         target: 'http://localhost:3000',
-        ws: true,
         changeOrigin: true
+      },
+      '/api/socket.io': {
+        target: "http://localhost:3000/api/socket.io",
+        ws: true
       }
     }
   },

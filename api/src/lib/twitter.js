@@ -1,3 +1,5 @@
+const _ = require('underscore')
+const axios = require('axios')
 const config = require('../config')
 const moment = require('moment')
 const sanitize = require('sanitize-html')
@@ -59,7 +61,67 @@ const processTweet = (tweet) => {
   return entry
 }
 
+const getToken = async () => {
+  try {
+    const token = await axios.post(config.twitter.urls.token,
+      'grant_type=client_credentials',
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Authorization': 'Basic ' + Buffer.from(`${config.twitter.keys.consumer_key}:${config.twitter.keys.consumer_secret}`, 'binary').toString('base64')
+        }
+      }
+    )
+
+    return token.data.access_token
+  } catch (err) {
+    logger.error('[TWITTER-API:AUTH]'.cyan.red, err)
+  }
+}
+
+const getLastTweets = async (token) => {
+  try {
+    const tweets = await axios.post(config.twitter.urls.search,
+      {"query": "#wmhb", "maxResults": 10},
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      }
+    )
+
+    return tweets.data.results
+  } catch (err) {
+    logger.error('[TWITTER-API:SEARCH]'.cyan.red, err)
+  }
+}
+
+const setLastTweets = async () => {
+  let token = await getToken()
+  if (token) {
+    let tweets = await getLastTweets(token)
+    tweets = _.first(_.filter(tweets, (tweet) => isNoRetweet(tweet)), 6).reverse()
+    tweets.map(tweet => {
+      if (isNoRetweet(tweet) && tweet.id_str != tweetsLastId) {
+        let processedTweet = processTweet(tweet)
+        stateMgr.tweetStore.add(processedTweet)
+      }
+    })
+  }
+}
+
 const init = (wand) => {
+
+  /*
+   * To use this feature you have to have a valid premium twitter api dev account with a set up app and env
+   * see:   https://developer.twitter.com/en/docs/tweets/search/api-reference
+   * usage: https://developer.twitter.com/en/docs/tweets/search/api-reference/premium-search.html#DataEndpoint
+   */
+
+  if (config.twitter.isPremium && stateMgr.tweetStore.get().length <= 0) {
+    logger.info('[TWITTER]'.cyan, `TweetStore Empty. Getting the last 6 tweets from twitter...`)
+    setLastTweets()
+  }
   stateMgr.setTwitter({hashtag: config.twitter.default_hashtag, isStreaming: true})
   hashtag = config.twitter.default_hashtag
 
