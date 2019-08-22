@@ -14,7 +14,7 @@ if (token) {
 
 Vue.config.productionTip = true
 Vue.use(new VueSocketIO({
-  debug: true,
+  debug: false,
   connection: `${window.location.origin}`
 }))
 
