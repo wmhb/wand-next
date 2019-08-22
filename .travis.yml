@@ -9,42 +9,16 @@ env:
     - secure: MVrPN6zB844A74Fzvxx7fVC24fax5rZO0eYs/nwU+/Hh8K4dEaxrNA4IA0qdp/HNGBV9Ub4YDxyAtJ4lwA7fIgak4hA0LOziWKbGaM0T435Rqu7UeOxT7eUzDV92GgOEP3I0yncvHba+r7rkp2WC/iw2L6AFtF0g8zNYBTJy4O+iCl7Lf8vnR6FMm5lsf7GDQIVJgtNbagICVqfOvNvN74p5m5noBujO54FWVh5mcI9jaGQzM2kYlfDEbkysRAAcMPTH3E+OmV8PTAdVD2T75hj433Gbhw1L0rQ/FMeBHqbOfZ4LkSjnLzgW3P06mHHtW7CA8OyFWm4vGdR9o33C0iFZMU6r1MYiafhCdIagWKjvMbiYZSzY12ojTPMG8Ddw9yMNE4P7eEQn1Gotmq6yXELtB/oYKY4Q8h5AtzUPIGP0CDxuFduSximcCPYzjlWpIaPKBBJzCW4wBjvuPwQERxepxJ2GGEjeNjn/JU+0wlJM4+TbyG0xVEshdGgdSGdDf1Ofor6n5nKeg7ZqKCERx45EB0bZranZmRQFjAfnO3881IV3b3JBEUPOz4ryguIX0/lzT5Sd9u3C4650zeM2FSVuscLCJoL/kWu772ni/6Rg0w6YGUQcezuPx/GHqMbbJdDsI2pK9Jb1XNRMa3LIRN5G//imHl1Ou9cVO1triD8=
 matrix:
   include:
-  - name: Frontend
-    before_install:
-    - cd client
-    - npm install
-    - npm install -g vue-cli
-    script:
-    - npm run lint
-    - npm run build
-    before_deploy:
-    - echo -e "Building master branch - Deploying client..."
-    - echo $DEPLOY_SERVER 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC6moWj2SpEtZFTkDu57pWRLIjkuWBOjxWXxcqVaHgYY+pXRlwJBEhlLfc3Aoz0xPxrUk4k/PgtmyTUfinsoC/XKjI7hJql8MKa92eL9Zug/f/lEooFG5awLmikVYmePDfxr23Hw1Ti83oHBrljj17B+0wAPY8gNf+GuuB0n63x7idX35fhhj8R+FzynMObUM1Vqglxm2Q55Z9YJv02HmNc/bQD+XZlDKhaw2DruP/eko6pvcR2gSy4zyWefLHdni4qk8qhZ73wIyiLBSfhhBFNOIZGEdvbjoxI1ddvWao7X5X2xmRNalWJfSiKFw6PoZdtzRKXN6PRoGGAEVxTmEYI9M6jkAdUhxb4VFlWPkAUTIW+AJu90mARDqkKiKxWydg9z0su/2PMkGXh8c+toa/Xz3FqbNuhbCzFovvaTQbWwyBo/v//DkhMlYE6tKyBm8LYBc5/QH0y384hEGqqwO0KVK/KXl5Ap4r/6BT4l5kGuhBrBVixXPxBaQHGi7mwa95JZlLfe2N18ZizK9Vkvjy3H+baCCkmgfY6tvbgUH5xHcxFIZOP5Et8NpPTx0As8K3QFXq4KxlRzjVn+zFdsuO0TSPyWJ7P0nWcc/o8GWFXmRfJH8xQmMLbMJuNwbZjPoqkWYKyKy5tnH/M+pKh2xwKvpW83Q5FE5c0+YDlbXAxHQ==' >> $HOME/.ssh/known_hosts
-    - openssl aes-256-cbc -K $encrypted_c203fb406a06_key -iv $encrypted_c203fb406a06_iv -in $TRAVIS_BUILD_DIR/deploy_rsa.enc -out /tmp/deploy_rsa -d
-    - eval "$(ssh-agent -s)"
-    - chmod 600 /tmp/deploy_rsa
-    - ssh-add /tmp/deploy_rsa
-    deploy:
-      provider: script
-      skip_cleanup: true
-      script: >-
-        ssh -p22 $DEPLOY_USER@$DEPLOY_SERVER "mkdir -p $CLIENT_DIR/_tmp" &&
-        echo "RSYNC FRONTEND" &&
-        rsync -rav -e ssh --exclude='.git/' --exclude=.DS_Store --delete-excluded $TRAVIS_BUILD_DIR/client/dist/* $DEPLOY_USER@$DEPLOY_SERVER:$CLIENT_DIR/_tmp &&
-        echo "REMOVE OLD FILES" &&
-        ssh -p22 $DEPLOY_USER@$DEPLOY_SERVER "cd $CLIENT_DIR && rm -rf assets index.html favicon.ico || true && mv $CLIENT_DIR/_tmp/* $CLIENT_DIR && rm -rf $CLIENT_DIR/_tmp"
-      on:
-        branch: master
   - name: Server
     before_install:
-    - cd api
     - npx npm-force-resolutions
     - npm prune
     - npm install
     script:
-    - npm run build
+    - npm run vue:lint
+    - npm run vue:build
     before_deploy:
-    - echo "Building master branch - Deploying server..."
+    - echo "Building master branch - Deploying app..."
     - echo $DEPLOY_SERVER 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC6moWj2SpEtZFTkDu57pWRLIjkuWBOjxWXxcqVaHgYY+pXRlwJBEhlLfc3Aoz0xPxrUk4k/PgtmyTUfinsoC/XKjI7hJql8MKa92eL9Zug/f/lEooFG5awLmikVYmePDfxr23Hw1Ti83oHBrljj17B+0wAPY8gNf+GuuB0n63x7idX35fhhj8R+FzynMObUM1Vqglxm2Q55Z9YJv02HmNc/bQD+XZlDKhaw2DruP/eko6pvcR2gSy4zyWefLHdni4qk8qhZ73wIyiLBSfhhBFNOIZGEdvbjoxI1ddvWao7X5X2xmRNalWJfSiKFw6PoZdtzRKXN6PRoGGAEVxTmEYI9M6jkAdUhxb4VFlWPkAUTIW+AJu90mARDqkKiKxWydg9z0su/2PMkGXh8c+toa/Xz3FqbNuhbCzFovvaTQbWwyBo/v//DkhMlYE6tKyBm8LYBc5/QH0y384hEGqqwO0KVK/KXl5Ap4r/6BT4l5kGuhBrBVixXPxBaQHGi7mwa95JZlLfe2N18ZizK9Vkvjy3H+baCCkmgfY6tvbgUH5xHcxFIZOP5Et8NpPTx0As8K3QFXq4KxlRzjVn+zFdsuO0TSPyWJ7P0nWcc/o8GWFXmRfJH8xQmMLbMJuNwbZjPoqkWYKyKy5tnH/M+pKh2xwKvpW83Q5FE5c0+YDlbXAxHQ==' >> $HOME/.ssh/known_hosts
     - openssl aes-256-cbc -K $encrypted_c203fb406a06_key -iv $encrypted_c203fb406a06_iv -in $TRAVIS_BUILD_DIR/deploy_rsa.enc -out /tmp/deploy_rsa -d
     - eval "$(ssh-agent -s)"
@@ -53,14 +27,6 @@ matrix:
     deploy:
       provider: script
       skip_cleanup: true
-      script: >-
-        ssh -p22 $DEPLOY_USER@$DEPLOY_SERVER "mkdir -p $SERVER_DIR/_tmp" &&
-        echo "STOPPING WAND-SERVER SERVICE" &&
-        ssh -p22 $DEPLOY_USER@$DEPLOY_SERVER "supervisorctl stop wand-server || true" &&
-        echo "RSYNC SERVER" &&
-        rsync -rav -e ssh --exclude='.git/' --exclude=.DS_Store --delete-excluded $TRAVIS_BUILD_DIR/api/dist/server.js $TRAVIS_BUILD_DIR/api/package.json $DEPLOY_USER@$DEPLOY_SERVER:$SERVER_DIR/_tmp &&
-        echo "INSTALL NEW DEPS" &&
-        ssh -p22 $DEPLOY_USER@$DEPLOY_SERVER "cd $SERVER_DIR && rm -f server.js || true && mv $SERVER_DIR/_tmp/* $SERVER_DIR && rm -rf $SERVER_DIR/_tmp && npm install && supervisorctl restart wand-server" &&
-        echo "RESTARTED WAND-SERVER SERVICE"
+      script: bash scripts/deploy.sh
       on:
         branch: master
