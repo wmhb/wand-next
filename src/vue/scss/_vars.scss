@@ -1,0 +1,64 @@
+// --------
+//  _vars.scss
+// --------
+
+$breakpoints: (
+  "sm": '576px',
+  "md": '768px',
+  "lg": '992px',
+  "xl": '1200px'
+);
+
+// descriptive variables, add as needed:
+// greyscale
+$black          : hsla(0, 0%, 20%, 0.95) !default;
+$darkgrey       : lighten($black, 25%) !default;
+$grey           : lighten($black, 50%) !default;
+$lightgrey      : hsl(210, 5%, 75%) !default;
+$lightergrey    : lighten($lightgrey, 20%) !default;
+$lightestgrey   : lighten($black, 95%) !default;
+$white          : hsla(0, 0%, 100%, 0.95) !default;
+$white-solid    : hsl(0, 0%, 100%) !default;
+
+// colors
+$flashygreen: hsl(127, 63%, 49%);
+$green: darken($flashygreen, 25%);
+
+$hotpink: hsl(319, 93%, 68%);
+
+$sunsetorange: hsl(28, 100%, 55%);
+
+$tomatored: hsl(3, 100%, 61%);
+
+$heavenblue: hsl(197, 100%, 75%);
+$blue: darken($heavenblue, 25%);
+
+$fatyellow: hsl(52, 100%, 50%);
+
+$smoothviolet: hsl(292, 98%, 42%);
+
+// color modifiers
+$lightenByPercent: 10%;
+$darkenByPercent: 5%;
+
+// Animation Vars
+$ease-cb: cubic-bezier(.4, 0, .2, 1);
+$ease--smooth-fade: cubic-bezier(.365,.005,.355,1);
+
+$transition-duration: 500ms;
+$transition-short-duration: 200ms;
+
+// Extra small screen / phone
+$screen-xs:                  480px;
+
+// Small screen / tablet
+$screen-sm:                  768px;
+
+// Medium screen / desktop
+$screen-md:                  992px;
+
+// 720p / desktop
+$screen-l:                  1280px;
+
+// 1080p / desktop
+$screen-xl:                  1920px;

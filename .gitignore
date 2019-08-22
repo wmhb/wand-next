@@ -78,3 +78,9 @@ typings/
 
 # Project specifig configuration
 config.js
+
+# Tweet Database
+tweets-db.json
+
+# Compiled sources
+dist/
