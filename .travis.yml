@@ -15,6 +15,7 @@ matrix:
     - npm prune
     - npm install
     script:
+    - cp config.example.js config.js
     - npm run vue:lint
     - npm run vue:build
     before_deploy:
