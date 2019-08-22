@@ -3,7 +3,6 @@ const configure = require('./src/api/configure')
 
 module.exports = {
   devServer: {
-    host: 'wand.local',
     after(app, devServer) {
       // HACK: Using setTimeout is a pretty nasty way to get ahold of
       // the actual HTTP server the Webpack DevServer spins up.
