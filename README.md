@@ -2,7 +2,7 @@
 
 > A Webmontag Bremen twitterwall
 
-[![Build Status](https://travis-ci.org/wmhb/wand-next.svg?branch=master)](https://travis-ci.org/wmhb/wand-next)
+[![Build Status](https://github.com/wmhb/wand-next/workflows/Build%20&%20Deploy/badge.svg)
 
 ## First things first…
 
