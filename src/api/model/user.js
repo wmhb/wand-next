@@ -3,7 +3,7 @@ const config = require('../../../config')
 
 const { users } = config
 
-const getUserByName = user => _.find(config.users, user)
+const getUserByName = (user) => _.find(config.users, user)
 const getUserByIdAndName = (id, name) => _.omit(_.findWhere(users, { id, username: name }), 'password')
 const getUserScheme = (req) => {
   let { username } = req.body

@@ -15,9 +15,9 @@ let tweetsLastId = ''
 let stream
 let wand
 
-const isNoRetweet = tweet => tweet.retweeted === false && (tweet.text || '').substring(0, 2) !== 'RT'
+const isNoRetweet = (tweet) => tweet.retweeted === false && (tweet.text || '').substring(0, 2) !== 'RT'
 const hasKey = (object, ...keys) => keys.reduce((a, b) => (a || { })[b], object) !== undefined
-const isExtended = tweet => 'extended_tweet' in tweet
+const isExtended = (tweet) => 'extended_tweet' in tweet
 const getTweetMedia = (tweet) => {
   let mediaEntity = {}
   if (!isExtended(tweet) && hasKey(tweet, 'extended_entities', 'media')) {
@@ -30,7 +30,7 @@ const getTweetMedia = (tweet) => {
 
   return mediaEntity
 }
-const sanitizeAndHighlightHashtags = text => sanitize(text.replace(/((?:https):\/\/[\S]+)/gm, ''))
+const sanitizeAndHighlightHashtags = (text) => sanitize(text.replace(/((?:https):\/\/[\S]+)/gm, ''))
   .replace(/(#[a-zA-Z0-9\-_]+)/g, '<span class="hashtag">$1</span>')
   .replace(/(@[a-zA-Z0-9\-_]+)/g, '<span class="mention">$1</span>')
 const processTweet = (tweet) => {
@@ -81,7 +81,7 @@ const getLastTweets = () => {
 
 const setLastTweets = async () => {
   let tweets = await getLastTweets()
-  tweets = _.first(_.filter(tweets, tweet => isNoRetweet(tweet)), 6).reverse()
+  tweets = _.first(_.filter(tweets, (tweet) => isNoRetweet(tweet)), 6).reverse()
   tweets.map((tweet) => {
     if (isNoRetweet(tweet) && parseInt(tweet.id_str, 10) !== tweetsLastId) {
       const processedTweet = processTweet(tweet)
@@ -113,7 +113,6 @@ const initStream = () => {
     logger.error('[TWITTER]'.cyan.red, err)
   })
 }
-
 
 const init = (socket) => {
   /*

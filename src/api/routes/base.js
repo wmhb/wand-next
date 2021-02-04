@@ -39,7 +39,6 @@ router.get('/event/current', async (req, res) => {
   }
 })
 
-
 /**
  * GET Events - Next
  */

@@ -72,10 +72,10 @@ const sc = {
       }
     })
   },
-  resolve: url => new Promise((resolve, reject) => {
+  resolve: (url) => new Promise((resolve, reject) => {
     Axios.get(`https://api.soundcloud.com/resolve?url=${url}&client_id=${config.soundcloud.apiKey}`)
-      .then(resp => resolve(resp))
-      .catch(err => reject(err))
+      .then((resp) => resolve(resp))
+      .catch((err) => reject(err))
   }),
   toggle: () => {
     const scState = stateMgr.all().soundcloud.isPlaying

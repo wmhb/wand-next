@@ -19,9 +19,9 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     // Workaround for ESLint failing to parse files with template literals
     // with this error: "TypeError: Cannot read property 'range' of null"
-    "template-curly-spacing": "off",
-    "indent": ["error", 2, {
-      "ignoredNodes": ["TemplateLiteral"]
+    'template-curly-spacing': 'off',
+    indent: ['error', 2, {
+      ignoredNodes: ['TemplateLiteral']
     }]
   },
   parserOptions: {
