@@ -1,0 +1,61 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Build & Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install
+      run: npm install
+    - name: Build
+      run: |
+        cp config.example.js config.js
+        npm run vue:lint
+        npm run vue:build
+        echo "🛠 Building master branch - Deploying app..."
+    - uses: dennisausbremen/ssh-scp-deploy@1.0.3
+      with:
+        local: './src/api'                             
+        remote: ${{secrets.REMOTE_DIR}}/src                                           
+        host: ${{secrets.HOST}}
+        user: ${{secrets.USER}}
+        key: ${{secrets.DEPLOY_KEY}}
+        ssh_options: -o StrictHostKeyChecking=no
+        scp_options: -v
+    - uses: dennisausbremen/ssh-scp-deploy@1.0.3
+      with:
+        local: './dist'                             
+        remote: ${{secrets.REMOTE_DIR}}                                         
+        host: ${{secrets.HOST}}
+        user: ${{secrets.USER}}
+        key: ${{secrets.DEPLOY_KEY}}
+        ssh_options: -o StrictHostKeyChecking=no
+        scp_options: -v
+    - uses: dennisausbremen/ssh-scp-deploy@1.0.3
+      with:
+        local: './package.json'                             
+        remote: ${{secrets.REMOTE_DIR}}                                         
+        host: ${{secrets.HOST}}
+        user: ${{secrets.USER}}
+        key: ${{secrets.DEPLOY_KEY}}
+        post_upload: cd ${{secrets.REMOTE_DIR}} && npm install && supervisorctl restart wand-server
+        ssh_options: -o StrictHostKeyChecking=no
+        scp_options: -v
