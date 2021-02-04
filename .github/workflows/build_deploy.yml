@@ -32,7 +32,7 @@ jobs:
         npm run vue:lint
         npm run vue:build
         echo "🛠 Building master branch - Deploying app..."
-    - uses: AEnterprise/rsync-deploy@v1.0.1
+    - uses: AEnterprise/rsync-deploy@1.0.1
       env:
         DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
         ARGS: "-e -c -r --delete"
@@ -41,7 +41,7 @@ jobs:
         SERVER_IP: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USER }}
         SERVER_DESTINATION: ${{ secrets.REMOTE_DIR }}/src
-    - uses: AEnterprise/rsync-deploy@v1.0.1
+    - uses: AEnterprise/rsync-deploy@1.0.1
       env:
         DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
         ARGS: "-e -c -r --delete"
@@ -50,7 +50,7 @@ jobs:
         SERVER_IP: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USER }}
         SERVER_DESTINATION: ${{ secrets.REMOTE_DIR }}
-    - uses: AEnterprise/rsync-deploy@v1.0.1
+    - uses: AEnterprise/rsync-deploy@1.0.1
       env:
         DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
         ARGS: "-e -c -r --delete"
