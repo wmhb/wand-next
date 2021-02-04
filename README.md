@@ -2,7 +2,7 @@
 
 > A Webmontag Bremen twitterwall
 
-[![Build Status](https://github.com/wmhb/wand-next/workflows/Build%20&%20Deploy/badge.svg)
+![Build Status](https://github.com/wmhb/wand-next/workflows/Build%20&%20Deploy/badge.svg)
 
 ## First things first…
 
