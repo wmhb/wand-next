@@ -32,7 +32,7 @@ jobs:
         npm run vue:lint
         npm run vue:build
         echo "🛠 Building master branch - Deploying app..."
-    - uses: dennisausbremen/ssh-scp-deploy@1.0.3
+    - uses: dennisausbremen/ssh-scp-deploy@v1.0.3
       with:
         local: './src/api'                             
         remote: ${{secrets.REMOTE_DIR}}/src                                           
@@ -41,7 +41,7 @@ jobs:
         key: ${{secrets.DEPLOY_KEY}}
         ssh_options: -o StrictHostKeyChecking=no
         scp_options: -v
-    - uses: dennisausbremen/ssh-scp-deploy@1.0.3
+    - uses: dennisausbremen/ssh-scp-deploy@v1.0.3
       with:
         local: './dist'                             
         remote: ${{secrets.REMOTE_DIR}}                                         
@@ -50,7 +50,7 @@ jobs:
         key: ${{secrets.DEPLOY_KEY}}
         ssh_options: -o StrictHostKeyChecking=no
         scp_options: -v
-    - uses: dennisausbremen/ssh-scp-deploy@1.0.3
+    - uses: dennisausbremen/ssh-scp-deploy@v1.0.3
       with:
         local: './package.json'                             
         remote: ${{secrets.REMOTE_DIR}}                                         
