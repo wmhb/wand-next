@@ -1,5 +1,5 @@
 <template>
-  <layout name="LayoutAdmin">
+  <Layout name="LayoutAdmin">
     <div class="page-wrapper admin-wrapper bg-lightgrey">
       <div class="logout-container">
         <a @click="logout()">Logout</a>
@@ -71,7 +71,7 @@
       </section>
 
     </div>
-  </layout>
+  </Layout>
 </template>
 
 <script>

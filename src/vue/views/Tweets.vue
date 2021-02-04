@@ -1,5 +1,5 @@
 <template>
-  <layout name="LayoutWand">
+  <Layout name="LayoutWand">
     <div class="page-wrapper tweets-wrapper bg-lightgrey">
       <morph class="diag diag--pink"/>
       <transition-group name="tweet" tag="div" class="tweet__container" v-if="tweets.length">
@@ -33,7 +33,7 @@
         </div>
       </transition-group>
     </div>
-  </layout>
+  </Layout>
 </template>
 
 <script>
@@ -44,7 +44,6 @@ import de from 'date-fns/locale/de'
 import Layout from '../lib/Layout'
 
 import morph from '../assets/morph.svg'
-
 
 Vue.use(VueTimeago, {
   name: 'timeago',

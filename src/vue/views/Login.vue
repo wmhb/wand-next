@@ -1,5 +1,5 @@
 <template>
-  <layout name="LayoutAdmin">
+  <Layout name="LayoutAdmin">
     <div class="page-wrapper login-wrapper bg-lightgrey">
       <h1>Log In</h1>
       <p>Einloggen um die wmhb Wand zu steuern.</p>
@@ -20,7 +20,7 @@
         <button class="btn" type="submit">Absenden</button>
       </form>
     </div>
-  </layout>
+  </Layout>
 </template>
 
 <script>
