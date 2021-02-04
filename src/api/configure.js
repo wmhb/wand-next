@@ -5,7 +5,6 @@
 */
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
-const socketIO = require('socket.io')
 const config = require('../../config')
 const auth = require('./lib/auth')
 const routeAuth = require('./routes/authentication')
@@ -43,7 +42,11 @@ module.exports = (app, server) => {
     next()
   })
 
-  const io = socketIO(server)
+  const io = require('socket.io')(server, {
+    cors: {
+      origin: '*',
+    }
+  })
 
   io.on('connection', () => {
     io.emit('initialize', {
