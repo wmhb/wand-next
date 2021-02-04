@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Axios from 'axios'
 import VueSocketIO from 'vue-socket.io'
+import SocketIO from 'socket.io-client'
 
 import App from './vue/App.vue'
 import Router from './vue/router'
@@ -13,13 +14,16 @@ if (token) {
 }
 
 Vue.config.productionTip = true
+
+const socketConnection = SocketIO(`${window.location.origin}`)
+
 Vue.use(new VueSocketIO({
   debug: false,
-  connection: `${window.location.origin}`
+  connection: socketConnection
 }))
 
 new Vue({
   router: Router,
   store: Store,
-  render: h => h(App)
+  render: (h) => h(App)
 }).$mount('#app')
