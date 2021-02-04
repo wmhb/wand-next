@@ -32,31 +32,38 @@ jobs:
         npm run vue:lint
         npm run vue:build
         echo "🛠 Building master branch - Deploying app..."
-    - uses: dennisausbremen/ssh-scp-deploy@v1.0.3
+    - uses: AEnterprise/rsync-deploy@v1.0.1
+      env:
+        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        ARGS: "-e -c -r --delete"
+        SERVER_PORT: ${{ secrets.DEPLOY_PORT }}
+        FOLDER: "./src/api"
+        SERVER_IP: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USER }}
+        SERVER_DESTINATION: ${{ secrets.REMOTE_DIR }}/src
+    - uses: AEnterprise/rsync-deploy@v1.0.1
+      env:
+        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        ARGS: "-e -c -r --delete"
+        SERVER_PORT: ${{ secrets.DEPLOY_PORT }}
+        FOLDER: "./dist"
+        SERVER_IP: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USER }}
+        SERVER_DESTINATION: ${{ secrets.REMOTE_DIR }}
+    - uses: AEnterprise/rsync-deploy@v1.0.1
+      env:
+        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        ARGS: "-e -c -r --delete"
+        SERVER_PORT: ${{ secrets.DEPLOY_PORT }}
+        FOLDER: "./package.json"
+        SERVER_IP: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USER }}
+        SERVER_DESTINATION: ${{ secrets.REMOTE_DIR }}
+    - name: Restarting Node.js process
+      uses: appleboy/ssh-action@master
       with:
-        local: './src/api'                             
-        remote: ${{secrets.REMOTE_DIR}}/src                                           
-        host: ${{secrets.HOST}}
-        user: ${{secrets.USER}}
-        key: ${{secrets.DEPLOY_KEY}}
-        ssh_options: -o StrictHostKeyChecking=no
-        scp_options: -v
-    - uses: dennisausbremen/ssh-scp-deploy@v1.0.3
-      with:
-        local: './dist'                             
-        remote: ${{secrets.REMOTE_DIR}}                                         
-        host: ${{secrets.HOST}}
-        user: ${{secrets.USER}}
-        key: ${{secrets.DEPLOY_KEY}}
-        ssh_options: -o StrictHostKeyChecking=no
-        scp_options: -v
-    - uses: dennisausbremen/ssh-scp-deploy@v1.0.3
-      with:
-        local: './package.json'                             
-        remote: ${{secrets.REMOTE_DIR}}                                         
-        host: ${{secrets.HOST}}
-        user: ${{secrets.USER}}
-        key: ${{secrets.DEPLOY_KEY}}
-        post_upload: cd ${{secrets.REMOTE_DIR}} && npm install && supervisorctl restart wand-server
-        ssh_options: -o StrictHostKeyChecking=no
-        scp_options: -v
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USER }}
+        key: ${{ secrets.DEPLOY_KEY }}
+        port: ${{ secrets.DEPLOY_PORT }}
+        script: cd ${{secrets.REMOTE_DIR}} && npm install && supervisorctl restart wand-server                  
