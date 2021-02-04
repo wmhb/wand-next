@@ -1,5 +1,5 @@
 <template>
-  <layout name="LayoutWand">
+  <Layout name="LayoutWand">
     <div class="page-wrapper playing-wrapper bg-smoothviolet">
       <div class="playing">
         <div class="front">
@@ -20,7 +20,7 @@
         </div>
       </div>
     </div>
-  </layout>
+  </Layout>
 </template>
 
 <script>

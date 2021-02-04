@@ -1,5 +1,5 @@
 <template>
-  <layout name="LayoutWand">
+  <Layout name="LayoutWand">
     <div class="page-wrapper next-wrapper bg-heavenblue">
       <div v-if="nextEvent" class="next">
         <div class="lead">save the date</div>
@@ -13,7 +13,7 @@
         <div class="beginn">see you space cowboy...</div>
       </div>
     </div>
-  </layout>
+  </Layout>
 </template>
 
 <script>

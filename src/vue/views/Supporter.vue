@@ -1,11 +1,11 @@
 <template>
-  <layout name="LayoutWand">
+  <Layout name="LayoutWand">
     <div class="page-wrapper supporter-wrapper bg-lightgrey">
       <div class="supporter" :class="{ 'load': loaded }">
         <bdmLogo class="bremendigitalmedia"/>
       </div>
     </div>
-  </layout>
+  </Layout>
 </template>
 
 <script>

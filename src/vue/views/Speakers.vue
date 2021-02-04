@@ -1,5 +1,5 @@
 <template>
-  <layout name="LayoutWand">
+  <Layout name="LayoutWand">
     <div class="view-wrapper" v-images-loaded:on.done="loadCallback">
       <div v-for="(talk, idx) in talks" :key="idx">
         <transition name="slide-h">
@@ -22,7 +22,7 @@
         </transition>
       </div>
     </div>
-  </layout>
+  </Layout>
 </template>
 
 <script>

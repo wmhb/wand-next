@@ -59,8 +59,8 @@ const actions = {
 }
 
 const getters = {
-  twitter: state => state.twitter,
-  slides: state => state.slides
+  twitter: (state) => state.twitter,
+  slides: (state) => state.slides
 }
 
 export default {

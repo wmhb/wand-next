@@ -27,7 +27,7 @@ export default {
   },
   created: () => {
     // Add a response interceptor
-    Axios.interceptors.response.use(response => response, (error) => {
+    Axios.interceptors.response.use((response) => response, (error) => {
       const originalRequest = error.config
       if (error.response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true
@@ -44,7 +44,7 @@ export default {
       // Do something before request is sent
       Store.dispatch('auth_inspectToken')
       return config
-    }, error => Promise.reject(error))
+    }, (error) => Promise.reject(error))
   },
   sockets: {
     initialize(data) {

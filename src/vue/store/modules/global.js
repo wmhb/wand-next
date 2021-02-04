@@ -126,14 +126,14 @@ const actions = {
 
 const getters = {
   // Basics
-  isLogoInverted: state => state.isLogoInverted,
+  isLogoInverted: (state) => state.isLogoInverted,
   // Authentication
-  isAuthenticated: state => !!state.token,
-  authStatus: state => state.status,
+  isAuthenticated: (state) => !!state.token,
+  authStatus: (state) => state.status,
   // Config
-  config: state => state.config,
-  soundcloud: state => state.soundcloud,
-  nextEvent: state => state.events.next
+  config: (state) => state.config,
+  soundcloud: (state) => state.soundcloud,
+  nextEvent: (state) => state.events.next
 }
 
 export default {
