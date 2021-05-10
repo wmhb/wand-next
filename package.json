@@ -24,7 +24,7 @@
     "fitty": "2.3.3",
     "jsonwebtoken": "8.5.1",
     "jwt-decode": "3.1.2",
-    "lodash": "4.17.20",
+    "lodash": "4.17.21",
     "moment": "2.29.1",
     "morgan": "1.10.0",
     "passport": "0.4.1",
